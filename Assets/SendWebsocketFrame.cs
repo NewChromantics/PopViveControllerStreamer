@@ -15,6 +15,7 @@ public class FrameQueue<INPUT,OUTPUT>
 	int					EncodeConcurrent = 0;
 	int					MaxSendConcurrent = 3;
 	int					SendConcurrent = 0;
+	public bool			OnlySendLatest = false;
 		
 
 	System.Func<INPUT,OUTPUT>			EncodeFunction;
@@ -39,6 +40,9 @@ public class FrameQueue<INPUT,OUTPUT>
 
 		if ( EncodeQueue.Count == 0 )
 			return;
+
+		if ( OnlySendLatest && EncodeQueue.Count > 1 )
+			EncodeQueue.RemoveRange( 0, EncodeQueue.Count - 1 );
 
 		var Data = EncodeQueue[0];
 		EncodeQueue.RemoveAt(0);
@@ -77,6 +81,9 @@ public class FrameQueue<INPUT,OUTPUT>
 		if ( SendQueue.Count == 0 )
 			return;
 
+		if ( OnlySendLatest && SendQueue.Count > 1 )
+			SendQueue.RemoveRange( 0, SendQueue.Count - 1 );
+
 		var Data = SendQueue[0];
 		SendQueue.RemoveAt(0);
 
@@ -92,6 +99,13 @@ public class FrameQueue<INPUT,OUTPUT>
 public class JoysticksFrame
 {
 	public List<OpenvrJoystickFrame>	Joysticks;
+	public bool							IsKeyFrame()
+	{
+		foreach ( var j in Joysticks )
+			if ( j.IsKeyFrame() )
+				return true;
+		return false;
+	}
 }
 
 public class SendWebsocketFrame : MonoBehaviour
@@ -121,6 +135,11 @@ public class SendWebsocketFrame : MonoBehaviour
 	private float	PingTimeout = 1;
 
 	FrameQueue<JoysticksFrame,string>	JsonQueue;
+
+	[Range(1,90)]
+	public float			SendFrameRate = 60;
+	public float			SendDelayMs {	get { return 1.0f / SendFrameRate; } }
+	float LastSendTime;
 	
     public void setHost(string host) {
         _hosts = new string[1]{ host };
@@ -323,7 +342,18 @@ public class SendWebsocketFrame : MonoBehaviour
 	{
 		var Frame = new JoysticksFrame();
 		Frame.Joysticks = Joysticks;
+
+		var TimeSinceLastSend = Time.time - LastSendTime;
+		if ( TimeSinceLastSend < SendDelayMs && !Frame.IsKeyFrame() )
+		{
+			return;
+		}
+
+		if ( Frame.IsKeyFrame() )
+			Debug.Log("Keyframe");
+
 		JsonQueue.Push( Frame );
+		LastSendTime = Time.time;
 	}
 	
 
