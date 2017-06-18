@@ -1,3 +1,6 @@
 [submodule "Assets/PopUnityCommon"]
 	path = Assets/PopUnityCommon
 	url = https://github.com/SoylentGraham/PopUnityCommon.git
+[submodule "Assets/OpenvrController"]
+	path = Assets/OpenvrController
+	url = https://github.com/SoylentGraham/OpenvrController.git
