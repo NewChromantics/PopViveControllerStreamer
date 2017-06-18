@@ -5,6 +5,7 @@ using UnityEngine;
 public class ControllerUpdate : MonoBehaviour {
 
 	public GameObject		Template;
+	public GameObject		DotTemplate;
 
 	List<GameObject>		ControllerObjects;
 
@@ -31,6 +32,14 @@ public class ControllerUpdate : MonoBehaviour {
 		Controller.SetActive( Frame.Attached );
 		Controller.transform.localPosition = Frame.Position;
 		Controller.transform.localRotation = Frame.Rotation;
+
+		if ( Frame.AppButtonPressed )
+		{
+			var NewDot = GameObject.Instantiate( DotTemplate, this.transform );
+			NewDot.transform.localPosition = Frame.Position;
+			NewDot.transform.localRotation = Frame.Rotation;
+			NewDot.SetActive(true);
+		}
 	}
 
 	public void				UpdateControllers(List<OpenvrControllerFrame> ControllerFrames)
@@ -51,6 +60,7 @@ public class ControllerUpdate : MonoBehaviour {
 
 	void OnEnable()
 	{
+		DotTemplate.SetActive(false);
 		Template.SetActive(false);
 	}
 }

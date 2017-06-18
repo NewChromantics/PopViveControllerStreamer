@@ -348,10 +348,10 @@ public class SendWebsocketFrame : MonoBehaviour
 		{
 			return;
 		}
-
+		/*
 		if ( Frame.IsKeyFrame() )
 			Debug.Log("Keyframe");
-
+			*/
 		JsonQueue.Push( Frame );
 		LastSendTime = Time.time;
 	}
