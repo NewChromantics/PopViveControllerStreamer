@@ -98,7 +98,7 @@ public class FrameQueue<INPUT,OUTPUT>
 [System.Serializable]
 public class JoysticksFrame
 {
-	public List<OpenvrJoystickFrame>	Joysticks;
+	public List<OpenvrControllerFrame>	Joysticks;
 	public bool							IsKeyFrame()
 	{
 		foreach ( var j in Joysticks )
@@ -338,7 +338,7 @@ public class SendWebsocketFrame : MonoBehaviour
 	}
 	
 
-	public void Send(List<OpenvrJoystickFrame> Joysticks)
+	public void Send(List<OpenvrControllerFrame> Joysticks)
 	{
 		var Frame = new JoysticksFrame();
 		Frame.Joysticks = Joysticks;

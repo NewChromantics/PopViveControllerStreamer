@@ -150,6 +150,7 @@ MonoBehaviour:
       PublicKeyToken=null
   StatusText: {fileID: 0}
   PingTimeSecs: 10
+  SendFrameRate: 60
 --- !u!4 &93964818
 Transform:
   m_ObjectHideFlags: 0
@@ -187,41 +188,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 498495509}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84ac2dc1f12b48c48a323da16bd2d655, type: 3}
+  m_Script: {fileID: 11500000, guid: 13c8de3d770294e4ead7752efa38a2a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnUpdateLeft:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 560828575}
-        m_MethodName: FrameUpdate
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEvent_PositionRotationJoystick, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  OnUpdateRight:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1996615878}
-        m_MethodName: FrameUpdate
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEvent_PositionRotationJoystick, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   OnUpdateAll:
     m_PersistentCalls:
       m_Calls:
@@ -236,17 +205,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1914963611}
+        m_MethodName: UpdateControllers
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEvent_JoystickFrames, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  OnUpdateCalibration:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEvent_PositionPosition, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  AxisLeftTouchPadX: LeftController Touchpad X
-  AxisLeftTouchPadY: LeftController Touchpad Y
-  AxisRightTouchPadX: RightController Touchpad X
-  AxisRightTouchPadY: RightController Touchpad Y
 --- !u!4 &498495511
 Transform:
   m_ObjectHideFlags: 0
@@ -271,25 +242,13 @@ GameObject:
   - component: {fileID: 560828578}
   - component: {fileID: 560828577}
   - component: {fileID: 560828576}
-  - component: {fileID: 560828575}
   m_Layer: 0
-  m_Name: Joystick Left
+  m_Name: Joystick Template
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &560828575
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 560828574}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8be55d96de35cc4dab5cef37a59f2c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!23 &560828576
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -347,12 +306,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 560828574}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.4}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_Father: {fileID: 1914963612}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &580703999
 GameObject:
@@ -508,97 +467,45 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!1 &1996615877
+--- !u!1 &1914963610
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 1996615882}
-  - component: {fileID: 1996615881}
-  - component: {fileID: 1996615880}
-  - component: {fileID: 1996615879}
-  - component: {fileID: 1996615878}
+  - component: {fileID: 1914963612}
+  - component: {fileID: 1914963611}
   m_Layer: 0
-  m_Name: Joystick Right
+  m_Name: Joystick Renderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1996615878
+--- !u!114 &1914963611
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1996615877}
+  m_GameObject: {fileID: 1914963610}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8be55d96de35cc4dab5cef37a59f2c9, type: 3}
+  m_Script: {fileID: 11500000, guid: ba05df07ec76999438fcc5f83161ede4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!23 &1996615879
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1996615877}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 1
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
---- !u!65 &1996615880
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1996615877}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!33 &1996615881
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1996615877}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &1996615882
+  Template: {fileID: 560828574}
+--- !u!4 &1914963612
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1996615877}
+  m_GameObject: {fileID: 1914963610}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.4}
-  m_Children: []
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 560828579}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
